@@ -75,6 +75,8 @@
 	}
 
 	let condition = 'status';
+
+	$: console.log($form);
 </script>
 
 <div class="flex min-h-10 w-full gap-2 pb-2">
@@ -103,23 +105,25 @@
 				<Dialog.Title>Create a new ticket</Dialog.Title>
 			</Dialog.Header>
 			<form method="post" use:enhance class="flex flex-col gap-2">
-				<div>
-					<Label for="name">Name</Label>
-					<Input id="name" name="name" placeholder="e.g Water bill" bind:value={$form.name} />
-					{#if $errors.name}<span class="text-xs font-medium text-rose-500">{$errors.name}</span
-						>{/if}
-				</div>
-				<div>
-					<Label for="price">Price</Label>
-					<Input
-						id="price"
-						name="price"
-						type="number"
-						placeholder="e.g $ 25.00"
-						bind:value={$form.price}
-					/>
-					{#if $errors.price}<span class="text-xs font-medium text-rose-500">{$errors.price}</span
-						>{/if}
+				<div class="flex grid-cols-3 flex-col gap-2 sm:grid">
+					<div class="col-span-2">
+						<Label for="name">Name</Label>
+						<Input id="name" name="name" placeholder="e.g Water bill" bind:value={$form.name} />
+						{#if $errors.name}<span class="text-xs font-medium text-rose-500">{$errors.name}</span
+							>{/if}
+					</div>
+					<div>
+						<Label for="price">Price</Label>
+						<Input
+							id="price"
+							name="price"
+							mask="decimal"
+							placeholder="e.g $ 25.00"
+							bind:value={$form.price}
+						/>
+						{#if $errors.price}<span class="text-xs font-medium text-rose-500">{$errors.price}</span
+							>{/if}
+					</div>
 				</div>
 				<div class="flex grid-cols-2 flex-col gap-2 sm:grid">
 					<div>
@@ -129,7 +133,10 @@
 								<option value={status.id}>{status.name}</option>
 							{/each}
 						</select>
-						<Select.Root onSelectedChange={(event) => ($form.status_id = event?.value)}>
+						<Select.Root
+							selected={$form.status_id}
+							onSelectedChange={(event) => ($form.status_id = event?.value)}
+						>
 							<Select.Trigger>
 								<Select.Value placeholder="Status" />
 							</Select.Trigger>
@@ -148,7 +155,10 @@
 								<option value={priority.id}>{priority.name}</option>
 							{/each}
 						</select>
-						<Select.Root onSelectedChange={(event) => ($form.priority = event?.value)}>
+						<Select.Root
+							selected={$form.priority}
+							onSelectedChange={(event) => ($form.priority = event?.value)}
+						>
 							<Select.Trigger>
 								<Select.Value placeholder="Priority" />
 							</Select.Trigger>
@@ -167,7 +177,10 @@
 								<option value={method.id}>{method.name}</option>
 							{/each}
 						</select>
-						<Select.Root onSelectedChange={(event) => ($form.method_id = event?.value)}>
+						<Select.Root
+							selected={{ label: 'teste', value: $form.method_id }}
+							onSelectedChange={(event) => ($form.method_id = event?.value)}
+						>
 							<Select.Trigger>
 								<Select.Value placeholder="Method" />
 							</Select.Trigger>

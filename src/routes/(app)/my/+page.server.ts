@@ -7,7 +7,7 @@ const schema = z.object({
 	name: z.string().min(1, { message: 'Name is required!' }),
 	price: z.number().min(0, { message: 'Value cannot be blank!' }),
 	status_id: z.number(),
-	priority: z.string(),
+	priority: z.string().default('medium'),
 	method_id: z.number()
 });
 
