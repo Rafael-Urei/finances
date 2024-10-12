@@ -39,6 +39,6 @@ export const actions = {
 			});
 		}
 
-		return { form };
+		redirect(302, '/my');
 	}
 };
