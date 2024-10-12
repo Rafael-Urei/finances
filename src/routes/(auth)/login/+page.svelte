@@ -10,7 +10,16 @@
 	let loading = false;
 	let showPassword = false;
 
-	const { form, errors, enhance } = superForm(data.form);
+	const { form, errors, enhance } = superForm(data.form, {
+		onSubmit() {
+			loading = true;
+		},
+		onResult({ result }) {
+			if (result.type === 'failure' || result.type === 'success') {
+				loading = false;
+			}
+		}
+	});
 </script>
 
 <form method="post" use:enhance class="flex max-w-96 flex-col gap-3 sm:min-w-96">
