@@ -3,7 +3,7 @@
 	export let data;
 </script>
 
-<div class="flex h-full w-full bg-blue-200">
+<div class="flex h-full w-full flex-col-reverse bg-blue-200 sm:flex-row">
 	<div
 		class="flex h-full grid-cols-2 flex-col justify-between gap-10 bg-white px-10 py-4 shadow-md"
 	>
@@ -13,5 +13,5 @@
 		<slot></slot>
 		<footer></footer>
 	</div>
-	<div class="flex-1 bg-[url('https://picsum.photos/536/354')] bg-cover bg-no-repeat"></div>
+	<div class="h-full w-full bg-black"></div>
 </div>
